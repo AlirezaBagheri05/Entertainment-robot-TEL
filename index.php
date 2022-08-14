@@ -11,8 +11,7 @@ $parametrs = array(
     'chat_id'=>$chat_id,
     'text'=>$text
 );
-$firstbot = new bot_telegram(API_URL);
-$result = $firstbot->sendMessage('sendMessage',$parametrs);
-print_r($result);
+$firstbot = new bot_telegram(API_URL1);
+$firstbot->sendMessage('sendMessage',$parametrs);
 
 ?>
