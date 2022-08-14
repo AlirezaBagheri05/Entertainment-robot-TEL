@@ -12,7 +12,7 @@ $parametrs = array(
     'text'=>$text
 );
 $firstbot = new bot_telegram(API_URL);
-$result = $fistbot->sendMessage('sendMessage',$parametrs);
+$result = $firstbot->sendMessage('sendMessage',$parametrs);
 print_r($result);
 
 ?>
