@@ -20,28 +20,24 @@ if($text == '/jock'){
     $id = rand(1,$max);
     $txt = $value->select_jock($id);
     if($txt){
-        $text = $txt['value'];
+        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txt['value'];
     }else{
         $text = 'حافظم پاک شده. بهم یاد بده 🥲';
     }
-}
-else if($text == '/poem'){
+}else if($text == '/poem'){
     $max = $value->count(PBOT);
     $id = rand(1,$max);
     $txt = $value->select_poem($id);
     if($txt){
-        $text = $txt['value'];
+        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txt['value'];
     }else{
         $text = 'حافظم پاک شده. بهم یاد بده 🥲';
     }
-}
-else if($text == '/poem_maker'){
+}else if($text == '/poem_maker'){
     $text = "راهنما🐶\nفقط کافیه اول جملت کلمه 'شعر یاد بگیر' رو بزاری😍\n\nمثلا\nشعر یاد بگیر امیر گر شود خمیر به امیرعلی ربطی ندارع😐😐🤣";
-}
-else if($text == '/jock_maker'){
+}else if($text == '/jock_maker'){
     $text = "راهنما🐶\nفقط کافیه اول جملت کلمه 'جک یاد بگیر' رو بزاری😍\n\nمثلا\nجک یاد بگیر امیر خورد به امین خمیر شد😂😐";
-}
-else if($made_jock){
+}else if($made_jock){
     $text =  str_replace('جک یاد بگیر',"",$text);
     $name = "jock";
     $txt = $value->insert_jock($name,$text,$user_name);
@@ -50,8 +46,7 @@ else if($made_jock){
     }else{
         $text = 'متاسفانه ثبت نشد';
     }
-}
-else if($made_poem){
+}else if($made_poem){
     $text =  str_replace('شعر یاد بگیر',"",$text);
     $name = "poem";
     $txt = $value->insert_poem($name,$text,$user_name);
@@ -60,8 +55,7 @@ else if($made_poem){
     }else{
         $text = 'متاسفانه ثبت نشد';
     }
-}
-else if($text == '/start'){
+}else if($text == '/start'){
     $text = "به اولین ربات من خوش اومديد😍\n\nاین ربات قادر به ارسال جک و شعر میباشد🙃❤️\nو همچنین میتونید بهش شعر و جک هم یاد بدید🤩";
 }else{
     $text ="دستور وارد شده صحیح نمیباشد";
