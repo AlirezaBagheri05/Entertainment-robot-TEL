@@ -1,6 +1,6 @@
 <?php
 
-// CREATE TABLE `eawallir_firstbot`.`jock` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(20) NOT NULL , `value` LONGTEXT NOT NULL , `maker` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+// CREATE TABLE `eawallir_firstbot`.`jock` ( `id` INT NOT NULL , `name` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `value` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `maker` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 // tables
 define('JBOT','jock');
@@ -57,7 +57,6 @@ class lib{
         $qr = "INSERT INTO `".JBOT."` (`id`, `name`, `value`, `maker`) VALUES (NULL, '$name', '$value', '$maker');";
         $result = $this->query($qr);
         return $result;
-        mysqli_close($link);
     }
 
     public function select_jock($id){
@@ -72,7 +71,6 @@ class lib{
         $qr = "INSERT INTO `".PBOT."` (`id`, `name`, `value`, `maker`) VALUES (NULL, '$name', '$value', '$maker');";
         $result = $this->query($qr);
         return $result;
-        mysqli_close($link);
     }
 
     public function select_poem($id){
