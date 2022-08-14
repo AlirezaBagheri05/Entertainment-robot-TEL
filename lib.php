@@ -1,10 +1,10 @@
 <?php
 
-// CREATE TABLE `eawallir_firstbot`.`firstbot` ( `id` INT NOT NULL AUTO_INCREMENT , `name`  VARCHAR(20) NOT NULL , `value` LONGTEXT NOT NULL , `maker` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+// CREATE TABLE `eawallir_firstbot`.`jock` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(20) NOT NULL , `value` LONGTEXT NOT NULL , `maker` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 // tables
-define('FBOT','firstbot');
-
+define('JBOT','jock');
+define('PBOT','poem');
 
 class lib{
     private $SERVER_NAME;
@@ -41,23 +41,53 @@ class lib{
         return $link;
     }
 
-    private function query($qrd){
+    private function query($qr){
         $link = $this->connect();
-        if(empty($qrd)){
+        if(empty($qr)){
             return "qurery is empty";
         }
-        $link = mysqli_query($link,$qr);
-        if(mysql_errno($link)){
-            return mysql_errno($link) . ": " . mysql_error($link). "\n";
-        }
-        return true;
-    }
-
-    public function insert($name,$value,$maker){
-        $qr = "INSERT INTO `".FBOT."` (`id`, `name`, `value`, `maker`) VALUES (NULL, '$name', '$value', '$maker');";
-        $result = $this->query($qr);
+        $result = mysqli_query($link,$qr);
+        // if(mysql_errno($result)){
+        //     return mysql_errno($result) . ": " . mysql_error($result). "\n";
+        // }
         return $result;
     }
 
+    public function insert_jock($name,$value,$maker){
+        $qr = "INSERT INTO `".JBOT."` (`id`, `name`, `value`, `maker`) VALUES (NULL, '$name', '$value', '$maker');";
+        $result = $this->query($qr);
+        return $result;
+        mysqli_close($link);
+    }
+
+    public function select_jock($id){
+        $qr = "SELECT `name`, `value`, `maker` FROM `".JBOT."` WHERE id = '$id'";
+        $result = $this->query($qr);
+        $row = mysqli_fetch_array($result);
+        return $row;
+        mysqli_close($link);
+    }
+
+    public function insert_poem($name,$value,$maker){
+        $qr = "INSERT INTO `".PBOT."` (`id`, `name`, `value`, `maker`) VALUES (NULL, '$name', '$value', '$maker');";
+        $result = $this->query($qr);
+        return $result;
+        mysqli_close($link);
+    }
+
+    public function select_poem($id){
+        $qr = "SELECT `name`, `value`, `maker` FROM `".PBOT."` WHERE id = '$id'";
+        $result = $this->query($qr);
+        $row = mysqli_fetch_array($result);
+        return $row;
+        mysqli_close($link);
+    }
+
+    public function count($dbname){
+        $qr = "select * from ".$dbname;
+        $result = $this->query($qr);
+        return mysqli_num_rows($result);
+        mysqli_close($link);
+    }
     
 }
