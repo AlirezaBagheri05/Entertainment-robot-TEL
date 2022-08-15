@@ -8,6 +8,7 @@ $content = file_get_contents('php://input');
 $update = json_decode($content , true);
 $chat_id = $update['message']['chat']['id'];
 $user_name = $update['message']['from']['first_name'];
+$message_id = $update['message']['message_id'];
 $text = $update['message']['text'];
 
 $made_jock = search_strings($text,'جک یاد بگیر');
@@ -78,11 +79,24 @@ if($text == '/jock'){
 }else{
     $text ="دستور وارد شده صحیح نمیباشد";
 }
-
+$text .= "\n\n\n<a href=\"https://www.eawall.ir/\">It is my site:)</a>";
 $parametrs = array(
     'chat_id'=>$chat_id,
-    'text'=>$text
+    'text'=>$text,
+    'reply_to_message_id'=>$message_id,
+    'reply_markup'=>array(resize_keyboard =>true,'keyboard'=>array(
+        array('/jock','/poem'),
+        array('/jock_maker','/poem_maker')
+    )),
+    'parse_mode'=>'HTML'
 );
+// $parametrs = array(
+//     'chat_id'=>$chat_id,
+//     'text'=>$text,
+//     'reply_to_message_id'=>$message_id,
+//     // 'reply_markup'=>array(force_reply=>true),
+//     'parse_mode'=>'HTML'
+// );
 $firstbot = new bot_telegram(API_URL1);
 $firstbot->sendMessage('sendMessage',$parametrs);
 
