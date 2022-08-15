@@ -20,7 +20,8 @@ if($text == '/jock'){
     $id = rand(1,$max);
     $txt = $value->select_jock($id);
     if($txt){
-        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txt['value'];
+        $txtv = urldecode($txt['value']);
+        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txtv;
     }else{
         $text = 'حافظم پاک شده. بهم یاد بده 🥲';
     }
@@ -29,7 +30,8 @@ if($text == '/jock'){
     $id = rand(1,$max);
     $txt = $value->select_poem($id);
     if($txt){
-        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txt['value'];
+        $txtv = urldecode($txt['value']);
+        $text = $txt['name']."\n".'نویسنده : '.$txt['maker']."\n\n".$txtv;
     }else{
         $text = 'حافظم پاک شده. بهم یاد بده 🥲';
     }
@@ -44,6 +46,7 @@ if($text == '/jock'){
         $name = "jock";
         $text = trim($text," ");
         if(!empty($text)){
+            $text = urlencode($text);
             $txt = $value->insert_jock($name,$text,$user_name);
         }
     }
@@ -60,6 +63,7 @@ if($text == '/jock'){
         $name = "poem";
         $text = trim($text," ");
         if(!empty($text)){
+            $text = urlencode($text);
             $txt = $value->insert_poem($name,$text,$user_name);
         }
     }
